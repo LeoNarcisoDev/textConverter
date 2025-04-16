@@ -11,7 +11,26 @@
 
         <form method="POST" class="space-y-4">
             <textarea name="text" rows="6" class="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Digite seu texto aqui..."></textarea>
-            <div class="text-center">
+
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <label class="font-semibold text-gray-700">Idioma:</label>
+                    <select name="lang" class="border p-2 rounded">
+                        <option value="pt-br" {% if selected_lang == 'pt-br' %}selected{% endif %}>Português</option>
+                        <option value="en" {% if selected_lang == 'en' %}selected{% endif %}>Inglês</option>
+                        <option value="es" {% if selected_lang == 'es' %}selected{% endif %}>Espanhol</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="font-semibold text-gray-700">Voz:</label>
+                    <select name="voice" class="border p-2 rounded">
+                        <option value="gtts" {% if selected_voice == 'gtts' %}selected{% endif %}>Simples (Google)</option>
+                        <option value="female" {% if selected_voice == 'female' %}selected{% endif %}>Feminina (Realista)</option>
+                        <option value="male" {% if selected_voice == 'male' %}selected{% endif %}>Masculina (Realista)</option>
+                    </select>
+                </div>
+
                 <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">Converter</button>
             </div>
         </form>
@@ -19,7 +38,7 @@
         {% if audio_file %}
         <div class="mt-6 text-center">
             <h2 class="text-xl font-semibold mb-2 text-green-600">🎧 Resultado</h2>
-            <audio controls class="mx-auto">
+            <audio controls class="mx-auto w-full max-w-md">
                 <source src="{{ url_for('static', filename='audios/' + audio_file) }}" type="audio/mpeg">
                 Seu navegador não suporta o player de áudio.
             </audio>
