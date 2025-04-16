@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversor de Texto em Áudio</title>
+</head>
+<body>
+    <h1>Conversor de Texto em Áudio (TTS)</h1>
+    <form method="POST">
+        <textarea name="text" rows="6" cols="60" placeholder="Digite seu texto aqui..."></textarea><br>
+        <button type="submit">Converter para Áudio</button>
+    </form>
+
+    {% if audio_file %}
+        <h3>Resultado:</h3>
+        <audio controls>
+            <source src="{{ url_for('static', filename='audios/' + audio_file) }}" type="audio/mpeg">
+            Seu navegador não suporta o elemento de áudio.
+        </audio><br>
+        <a href="{{ url_for('download', filename=audio_file) }}">Baixar MP3</a>
+    {% endif %}
+</body>
+</html>
